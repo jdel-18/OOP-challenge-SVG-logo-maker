@@ -1,60 +1,73 @@
-const fs = require('fs');
 const inquirer = require('inquirer');
-const generateLogo = require('./utils/generateMarkdown')
+const fs = require('fs');
+const { Triangle, Circle, Square } = require('./Assets/shapes.js')
+ 
 
-const questions = [
+inquirer.prompt([
     {
         type: 'input',
-        name: 'initials',
-        message: 'Please put your initials for the logo you would like to create. (Up to 3 max)'
+        name: 'txt',
+        message: 'Enter text: up to 3 characters only',
+        validate: (input) => {
+            if (input.length <= 3) {
+            return true } else {
+                return false
+            }
+        } 
+
     },
     {
-        type:' list',
-        message:'Please choose a color for the text.',
-        name: 'textColor',
-        choices: ['Blue', 'Orange', 'Yellow', 'Green']
+        type: 'input',
+        name: 'color',
+        message: 'Please choose text color for the logo'
     },
     {
-        type:' list',
-        message:'Please choose a shape for the logo.',
+        type: 'list',
         name: 'shape',
-        choices: ['square', 'circle', 'triangle']
+        choices: ['Circle', 'Triangle', 'Square']
     },
+    
     {
-        type:' list',
-        message:'Please choose a color for the shape.',
+        type: 'input',
         name: 'shapeColor',
-        choices: ['Blue', 'Orange', 'Yellow', 'Green']
-    },
-];
+        message: "What color would you like the chosen shape to be?",
+        
+        
+    }
+])
+.then(({txt, color, shape, shapeColor}) => {
+   var s;
+    if (shape === 'Circle') {
+    s = new Circle()
+   } 
+   else if (shape === 'Triangle') {
+    s = new Triangle()
+   }
+   else if (shape === 'Square') {
+    s = new Square()
+   }
 
-inquirer.prompt(questions).then((answer) => {
-    fs.writeFile
+   s.setColor(shapeColor)
+   
+   
+    var data = 
+    `
+   <svg version="1.1"
+     width="300" height="200"
+     xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="200" fill="white"/>
+  ${s.render()}
+
+
+
+  <text x="150" y="115" font-size="45" text-anchor="middle" fill="${color}">${txt}</text>
+
+</svg>`
+
+
+
+    fs.writeFile("logo.svg", data, ()=> {
+        console.log("Generated logo.svg");
+    }
+    )
 })
-
-function generateSVGFile(filename, data) {
-    fs.writeFile(filename, data, (err) => {
-        if (err) {
-            console.error(err);
-            return;
-        } console.log(`Logo has been created and saved to ${filename}`);
-    });
-}
-
-function init() {
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'filename',
-            message: 'Please enter a filename for your logo (e.g. mylogo.svg):'
-        },
-        ...questions
-    ])
-    .then((data) => {
-        const logo = generateLogo(data);
-        generateSVGFile(data.filename, logo);
-    })
-    .catch((err)=> console.error(err));
-}
-
-init();
