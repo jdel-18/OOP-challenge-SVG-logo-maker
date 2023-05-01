@@ -17,9 +17,10 @@ inquirer.prompt([
 
     },
     {
-        type: 'input',
+        type: 'list',
         name: 'color',
-        message: 'Please choose text color for the logo'
+        message: 'Please choose text color for the logo',
+        choices: ['red', 'blue', 'white', 'green', 'orange']
     },
     {
         type: 'list',
@@ -28,11 +29,10 @@ inquirer.prompt([
     },
     
     {
-        type: 'input',
+        type: 'list',
         name: 'shapeColor',
         message: "What color would you like the chosen shape to be?",
-        
-        
+        choices: ['red', 'blue', 'white', 'green', 'orange']
     }
 ])
 .then(({txt, color, shape, shapeColor}) => {
