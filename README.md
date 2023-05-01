@@ -13,11 +13,17 @@
 
 ## Installation
 
+![Screenshot 2023-05-01 171818](https://user-images.githubusercontent.com/124110067/235542400-3e20d4a4-c8ac-4b79-8b30-baed8322fce9.png)
+
 Open the integrated terminal on the project, type in "npm i", wait for the download to complete.
 
 ## Usage
 
+![Screenshot 2023-05-01 171914](https://user-images.githubusercontent.com/124110067/235542314-48339026-ce4c-449c-9eda-436d8b83595f.png)
+
 Using inquirer in the command line to answer some questions about creating a logo.
+
+![Screenshot 2023-05-01 171836](https://user-images.githubusercontent.com/124110067/235542338-eec9ba61-4bb1-491c-a2a7-1353fa9bdd00.png)
 
 Use "node index.js" to run code.
 
