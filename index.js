@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { Triangle, Circle, Square } = require('./Assets/shapes.js')
+const { Triangle, Circle, Square } = require('./lib/shapes.js')
  
 
 inquirer.prompt([
@@ -20,7 +20,7 @@ inquirer.prompt([
         type: 'list',
         name: 'color',
         message: 'Please choose text color for the logo',
-        choices: ['red', 'blue', 'white', 'green', 'orange']
+        choices: ['red', 'blue', 'white', 'black', 'green', 'orange', 'purple', 'pink']
     },
     {
         type: 'list',
@@ -32,22 +32,22 @@ inquirer.prompt([
         type: 'list',
         name: 'shapeColor',
         message: "What color would you like the chosen shape to be?",
-        choices: ['red', 'blue', 'white', 'green', 'orange']
+        choices: ['red', 'blue', 'white', 'black', 'green', 'orange', 'purple', 'pink']
     }
 ])
 .then(({txt, color, shape, shapeColor}) => {
-   var s;
+   var shapes;
     if (shape === 'Circle') {
-    s = new Circle()
+    shapes = new Circle()
    } 
    else if (shape === 'Triangle') {
-    s = new Triangle()
+    shapes = new Triangle()
    }
    else if (shape === 'Square') {
-    s = new Square()
+    shapes = new Square()
    }
 
-   s.setColor(shapeColor)
+   shapes.setColor(shapeColor)
    
    
     var data = 
@@ -56,7 +56,7 @@ inquirer.prompt([
      width="300" height="200"
      xmlns="http://www.w3.org/2000/svg">
 <rect width="300" height="200" fill="white"/>
-  ${s.render()}
+  ${shapes.render()}
 
 
 
